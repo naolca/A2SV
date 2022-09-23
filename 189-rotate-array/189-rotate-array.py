@@ -1,0 +1,10 @@
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        #i will just pop the last element of the list and place this element at the beginning.i pyhton,  doing this shifts the elements one unit
+        for i in range(k):            
+            nums.insert(0,nums.pop(-1)) 
+        
+        
