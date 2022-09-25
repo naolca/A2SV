@@ -5,9 +5,9 @@ class Solution:
         if n==1:
             return True
         num=1
-        three=4
+        four=4
         while three<n:
-            three=4**num
+            four=4**num
             num+=1
         if three==n:
             return True
