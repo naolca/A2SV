@@ -1,0 +1,10 @@
+def countingValleys(steps, path):
+    my_dict={'U':1,'D':-1}
+    level=0
+    valleys=0
+    for direction in path:
+        level+=my_dict[direction]
+        if level==0 and direction=='U':
+            valleys+=1
+            
+    return  valleys
