@@ -1,0 +1,24 @@
+class LRUCache:
+
+    def __init__(self, capacity):
+        self.cache = {}
+        self.capacity = capacity
+
+    def get(self, key):
+        value = self.cache.get(key,-1)
+        if not value is -1:
+            del self.cache[key]
+            self.cache[key] = value
+        return value
+            
+    def put(self, key, value):
+        if key in self.cache: 
+            del self.cache[key]
+        self.cache[key] = value
+        
+        if len(self.cache) > self.capacity:
+            del self.cache[next(iter(self.cache))]
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
