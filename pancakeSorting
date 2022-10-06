@@ -1,0 +1,21 @@
+class Solution:
+    def pancakeSort(self, arr: List[int]) -> List[int]:
+        answer=[]
+        end=len(arr)
+        while end>1:
+            maxInd=arr.index(end)
+            if maxInd==end-1: 
+                end-=1
+                continue
+
+           
+            if maxInd!=0:
+                arr[:maxInd+1]=reversed(arr[:maxInd+1])
+                answer.append(maxInd+1) 
+                
+            arr[:end]=reversed(arr[:end])
+            answer.append(end)
+            
+            end-=1 
+        return answer    
+        
