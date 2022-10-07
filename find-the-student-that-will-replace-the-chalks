@@ -1,0 +1,11 @@
+ number= k%sum(chalk)
+        if number==0:
+            return 0
+        else:
+            i=0
+            while number>=0:
+                number-=chalk[i]
+                i+=1
+            if number==0:
+                return i
+            return i-1
