@@ -1,0 +1,9 @@
+class Solution:
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        tempo = [0] * 1000
+        for n, start, end in trips:
+            for i in range(start, end):
+                tempo[i] += n
+        if max(tempo)<=capacity:
+            return True
+        return False
