@@ -1,0 +1,15 @@
+import sys
+class Solution:
+    def minStartValue(self, nums: List[int]) -> int:
+        for value in range(1,sys.maxsize):
+            j=1
+            i=value+nums[0]
+            while i >=1 and j<len(nums):
+                i+=nums[j]
+                j+=1
+            if j==len(nums) and i>=1:
+                return value
+            
+
+            
+    
