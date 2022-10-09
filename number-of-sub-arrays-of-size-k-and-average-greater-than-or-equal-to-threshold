@@ -1,0 +1,14 @@
+class Solution:
+    def numOfSubarrays(self, arr: List[int], k: int, threshold: int) -> int:
+        count, summation = 0, 0
+        window=[]
+        
+        for n in arr:
+            window.append(n)
+            if len(window) > k:
+                summation -= window.pop(0)
+            summation += n
+            if len(window) == k and summation / k >= threshold: 
+                count += 1
+        
+        return count
