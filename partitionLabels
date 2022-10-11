@@ -1,0 +1,11 @@
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        last_occurance={char:i for i, char in enumerate(s)}#stores the last occurance of each letter
+        start=j=0
+        ans=[]
+        for i,char in enumerate(s):
+            j=max(j,last_occurance[char])
+            if i==j:
+                ans.append(i-start+1)
+                start=i+1#move the start to the index of the first letter of the next partition
+        return ans
