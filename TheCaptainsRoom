@@ -1,0 +1,12 @@
+from collections import Counter
+
+def captainsRoom():
+    n = int(input())
+    array = input().split()
+    d = Counter(array)
+
+    for key in d:
+        if d[key] == 1:
+            print(int(key))
+if __name__=='__main__':
+    captainsRoom()
