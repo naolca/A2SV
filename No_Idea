@@ -1,0 +1,18 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import Counter
+def input_analysis():
+    m, n = input().split()
+
+    array = input().split()
+    A = input().split()
+    B = input().split()
+    happiness = 0
+    d = Counter(array)
+
+    for element in A:
+        happiness += (d[element])
+    for element in B:
+        happiness -= (d[element])
+    print(happiness)
+if __name__=='__main__':
+    input_analysis()
