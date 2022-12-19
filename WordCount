@@ -1,0 +1,17 @@
+from collections import Counter
+
+
+def howManyTimes():
+    n = int(input())
+    lst = [0]*n
+    for i in range(n):
+        lst[i] = input()
+    d = Counter(lst)
+    print(len(d))
+    for key in d:
+        print(d[key], end=' ')
+
+
+if __name__ == '__name__':
+    howManyTimes()
+howManyTimes()
