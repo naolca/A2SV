@@ -1,0 +1,13 @@
+class Solution:
+    def nearestValidPoint(self, x: int, y: int, points: List[List[int]]) -> int:
+        min_distance=3456765643
+        ans=-1
+        i=0
+        while i<len(points):
+            if x==points[i][0] or y==points[i][1]:
+                distance=abs(x-(points[i][0]))+abs(y-(points[i][1]))
+                if distance<min_distance:
+                    ans=i
+                    min_distance=distance
+            i+=1
+        return ans
