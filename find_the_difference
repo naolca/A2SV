@@ -1,0 +1,7 @@
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        sCount=Counter(s)
+        tCount=Counter(t)
+        for key in tCount:
+            if sCount[key]!=tCount[key] or key not in sCount:
+                return key
