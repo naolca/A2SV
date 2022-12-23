@@ -1,0 +1,21 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        
+
+        n1=0
+        length_1=len(num1)
+        
+        for i in range(length_1):
+            multiplier=10**(length_1-1-i)
+            n1+=(int(num1[i])*multiplier)
+        
+        n2=0
+        length_2=len(num2)
+
+        for i in range(length_2):
+            multiplier=10**(length_2-1-i)
+            n2+=(int(num2[i])*multiplier)
+
+        
+
+        return str(n1*n2)
