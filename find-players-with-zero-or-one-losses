@@ -1,0 +1,25 @@
+class Solution:
+    def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
+
+        ans=[[],[]]
+
+        losers=[i[1] for i in matches]
+        winners=[i[0] for i in matches]
+
+        print(losers)
+        d=Counter(losers)
+        print(d)
+        d_=Counter(winners)
+        
+        for key in d:
+            if d[key]==1:
+                ans[1].append(key)
+
+
+        for key in d_:
+            if d.get(key,0)==0 :
+                ans[0].append(key)
+
+        ans[0].sort()
+        ans[1].sort()
+        return ans
