@@ -1,0 +1,30 @@
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+def superSet():
+
+    final = True
+
+    list_of_the_set = input().split(" ")
+    superS = set()
+
+    for element in list_of_the_set:
+        superS.add(int(element))
+
+    N = int(input())
+
+    for i in range(N):
+        possible_sub_set = set()
+        candidate = input().split(' ')
+        for element in candidate:
+            possible_sub_set.add(int(element))
+        if len(superS) < len(possible_sub_set):
+            final = False
+        else:
+            for element in possible_sub_set:
+                if element not in superS:
+                    final = False
+    print(final)
+
+
+if __name__ == "__main__":
+    superSet()
