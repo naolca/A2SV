@@ -1,0 +1,27 @@
+class Solution:
+    def isAlienSorted(self, words: List[str], order: str) -> bool:
+    
+        for i in range(len(words)-1):
+            if not self.lexoGraph(words[i],words[i+1],order):
+                return False
+        return True
+    
+
+
+
+    def lexoGraph(self,s1, s2, order):
+
+        d = {}
+        for i in range(len(order)):
+            d[order[i]] = i
+        i = 0
+        while i < len(s1) and i < len(s2):
+            if d[s1[i]] < d[s2[i]]:
+                return True
+            elif d[s1[i]] > d[s2[i]]:
+                return False
+            i += 1
+        if i < len(s1):
+            return False
+    
+        return True
