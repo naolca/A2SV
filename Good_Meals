@@ -1,0 +1,17 @@
+class Solution:
+    def countPairs(self, deliciousness: List[int]) -> int:
+        seen=set()
+        keys=Counter(deliciousness)
+        powers=[]
+        ans=0
+        for i in range(22):
+            powers.append(2**i)
+        for key in keys:
+            for value in powers:
+                if value-key in keys and tuple(sorted([key,value-key])) not in seen:
+                    if value-key == key:
+                        ans+=math.comb(keys[key],2)
+                    else:
+                        ans+=(keys[key]*keys[value-key])
+                    seen.add(tuple(sorted([key,value-key])))
+        return ans%((10**9)+7)
