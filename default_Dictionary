@@ -1,0 +1,36 @@
+def main():
+
+    n_and_m = input().split(' ')
+    n = int(n_and_m[0])
+    m = int(n_and_m[1])
+
+    A = []
+
+    for i in range(n):
+        A.append(input())
+
+    B = []
+
+    for i in range(m):
+        B.append(input())
+
+    d = {}
+
+    for i in range(len(A)):
+        isThere = d.get(A[i], [])
+
+        if isThere:
+            d[A[i]].append(i)
+        else:
+            d[A[i]] = [i]
+
+    for element in B:
+        if d.get(element, []):
+            for idx in d[element][:len(d[element])-1]:
+                print(idx+1, end=' ')
+            print(d[element][-1]+1)
+        else:
+            print(-1)
+
+
+main()
