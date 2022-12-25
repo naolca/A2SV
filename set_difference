@@ -1,0 +1,26 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+def main():
+    N_english = int(input())
+    english_list = input().split(' ')
+    set_english = set()
+
+    for student in english_list:
+        set_english.add(int(student))
+
+    N_french = int(input())
+    french_list = input().split(' ')
+    set_french = set()
+
+    for student in french_list:
+        set_french.add(int(student))
+
+    i = 0
+
+    for student in set_english:
+        if student not in set_french:
+            i += 1
+    print(i)
+
+
+main()
