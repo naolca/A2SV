@@ -1,0 +1,39 @@
+class Solution:
+    def onesMinusZeros(self, grid: List[List[int]]) -> List[List[int]]:
+
+        rows = []
+
+        for i in range(len(grid)):
+
+            d = Counter(grid[i])
+            rows.append(d[1]-d[0])
+
+        colums = []
+        j = 0
+        for i in range(len(grid[0])):
+            summation = 0
+            for k in range(len(grid)):
+                if grid[k][i] == 0:
+                    summation -= 1
+                else:
+                    summation += 1
+            j += 1
+            colums.append(summation)
+            j = 0
+
+        print(rows)
+        print(colums)
+
+        final = []
+        for i in range(len(grid)):
+            final.append([])
+
+        i = 0
+
+        for number in rows:
+
+            for num in colums:
+                final[i].append(number+num)
+
+            i += 1
+        return final
