@@ -1,0 +1,23 @@
+class Solution:
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        
+        final=defaultdict(int)
+
+        for domain in cpdomains:
+
+            num,website=domain.split(' ')
+            subs=website.split('.')
+            num=int(num)
+            if len(subs)==2:
+                final[' '+subs[-1]]+=num
+                final[' '+website]+=num
+            elif len(subs)==3:
+                final[' '+subs[-1]]+=num
+                final[' '+subs[1]+'.'+subs[-1]]+=num
+                final[' '+subs[0]+'.'+subs[1]+'.'+subs[-1]]+=num
+        real=[]
+
+        for key in final:
+            real.append(str(final[key])+key)
+        return real
+
