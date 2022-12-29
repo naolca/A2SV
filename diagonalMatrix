@@ -1,0 +1,23 @@
+class Solution:
+    def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
+        
+        m=len(mat)
+        n=len(mat[0])
+
+        lst=[[] for i in range(m+n-1)]
+
+        for i in range(m):
+            for j in range(n):
+                lst[i+j].append(mat[i][j])
+
+        
+
+        ans=[]
+
+        for i in range(len(lst)):
+            if i%2:
+                ans+=lst[i]
+            else:
+                lst[i].reverse()
+                ans+=lst[i]
+        return ans
