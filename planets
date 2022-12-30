@@ -1,0 +1,26 @@
+from collections import Counter
+
+
+N = int(input())
+
+for i in range(N):
+
+    length, cost = list(map(int, input().split(' ')))
+
+    ans = 0
+
+    nums = list(map(int, input().split(' ')))
+
+    d = Counter(nums)
+
+    new = set()
+
+    for number in nums:
+        new.add(number)
+
+    for num in new:
+        if d[num] < cost:
+            ans += d[num]
+        else:
+            ans += cost
+    print(ans)
