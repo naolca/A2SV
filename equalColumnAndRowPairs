@@ -1,0 +1,30 @@
+class Solution:
+    def equalPairs(self, grid: List[List[int]]) -> int:
+
+        d=defaultdict(int)
+
+        d_=defaultdict(int)
+        
+        for i in range(len(grid)):
+            d_[tuple(grid[i])]+=1
+            lst=[]
+            for gr in grid:
+                lst.append(gr[i])
+            
+            d[tuple(lst)]+=1
+        
+        print(d)
+        print(d_)
+
+        ans=0
+
+        for key in d_:
+            if key in d:
+                ans+=(d[key]*d_[key])
+
+        return ans
+
+        
+
+        print
+        return 0
