@@ -1,0 +1,30 @@
+class Solution:
+    def printVertically(self, s: str) -> List[str]:
+        
+
+        ans=[]
+
+        s_as_alist=list(s.split(' '))
+
+        maximum=0
+
+        for word in s_as_alist:
+            maximum=max(len(word),maximum)
+
+        for i in range(maximum):
+            string=''
+
+            for word in s_as_alist:
+                if i>=len(word):
+                    string+=' '
+                else:
+                    string+=word[i]
+                    
+            if string:
+                while string[-1]==' ':
+                    string=string[:len(string)-1]
+                ans.append(string)
+        return ans
+            
+            
+        
