@@ -1,0 +1,21 @@
+class Solution:
+    def minOperations(self, boxes: str) -> List[int]:
+
+        idx_of_ones=[]
+
+        for i in range(len(boxes)):
+            if boxes[i]=='1':
+                idx_of_ones.append(i)
+        summation=sum(idx_of_ones)
+        n=len(idx_of_ones)
+
+        final=[]
+
+        for i in range(len(boxes)):
+            value=0
+            for number in idx_of_ones:
+                value+=abs(i-(number))
+            final.append(value)
+        
+        return final
+                
