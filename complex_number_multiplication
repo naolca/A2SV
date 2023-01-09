@@ -1,0 +1,16 @@
+class Solution:
+    def complexNumberMultiply(self, num1: str, num2: str) -> str:
+        #separate the real and imaginary part of the numbers
+        list1=list(num1.split('+'))
+        list2=list(num2.split('+'))
+        #remove the i from the imaginary parts
+        list1[1]=list1[-1].replace('i','')
+        list2[1]=list2[-1].replace('i','')
+
+        #generate the real and imaginary part of the final product
+        realPart=str((int(list1[0])*int(list2[0]))-((int(list1[1])*int(list2[1]))))
+    
+        imaginaryPart=str((int(list1[0])*int(list2[1]))+((int(list1[1])*int(list2[0]))))
+        
+        #combine the final parts.
+        return realPart+'+'+imaginaryPart+'i'
