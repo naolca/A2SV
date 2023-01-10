@@ -1,0 +1,27 @@
+class Solution:
+    def findDuplicate(self, paths: List[str]) -> List[List[str]]:
+
+        d=defaultdict(list)
+
+        for string in paths:
+
+            lst=list(string.split(' '))
+
+            for i in range(1,len(lst)):
+
+                idx=lst[i].index('(')
+                content=lst[i][idx+1:len(lst[i])-1]
+            
+                d[content].append(lst[0]+'/'+lst[i][:idx])
+
+        final=[]
+        for key in d:
+
+            if len(d[key])>1:
+                final.append(d[key])
+
+        return final
+
+
+
+        return []
