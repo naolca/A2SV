@@ -1,0 +1,10 @@
+class Solution:
+    def sumOfThree(self, num: int) -> List[int]:
+
+
+        smallest=int((num-3)/3)
+
+        if 3*smallest+3==num:
+            return [smallest,smallest+1,smallest+2]
+        
+        return []
