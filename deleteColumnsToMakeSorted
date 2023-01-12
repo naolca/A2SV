@@ -1,0 +1,16 @@
+class Solution:
+    def minDeletionSize(self, strs: List[str]) -> int:
+
+        i=0
+        ans=0
+        while i<len(strs[0]):
+            lexographical=True
+            for j in range(len(strs)-1):
+                if ord(strs[j][i])>ord(strs[j+1][i]):
+                    lexographical=False
+                    break
+            if not lexographical:
+                ans+=1
+            i+=1
+        return ans
+
