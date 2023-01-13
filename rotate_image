@@ -1,0 +1,21 @@
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+
+        final=[]
+        i=0
+        while i<len(matrix[0]):
+            tempo=[]
+            for j in range(len(matrix)-1,-1,-1):
+                tempo.append(matrix[j][i])
+        
+            final.append(tempo)
+            
+            i+=1
+        i=0
+        while i<len(matrix):
+            for j in range(len(matrix[0])):
+                matrix[i][j]=final[i][j]
+            i+=1
+
+
+        
