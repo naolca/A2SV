@@ -1,0 +1,22 @@
+class Solution:
+    def largestLocal(self, grid: list[list[int]]) -> list[list[int]]:
+        final = []
+        # i=row j=column
+        i = 0
+        while i < len(grid):
+            j = 0
+            tempo = []
+            while j+3 <= len(grid[0]) and i+2 < len(grid):
+                lst1 = (grid[i][j:j+3])
+                lst2 = grid[i+1][j:j+3]
+                lst3 = grid[i+2][j:j+3]
+                print(lst1+lst2+lst3)
+                tempo.append(max(lst1+lst2+lst3))
+
+                j += 1
+            if tempo:
+                final.append(tempo)
+
+            i += 1
+        return final
+                
