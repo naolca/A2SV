@@ -1,0 +1,20 @@
+class Solution:
+    def matrixReshape(self, mat: list[list[int]], r: int, c: int) -> list[list[int]]:
+
+        lst = []
+        final = []
+
+        
+
+        for row in mat:
+            lst += row
+
+        if len(lst)//c!=r:
+            return mat
+
+        for i in range(0,len(lst),c):
+            final.append(lst[i:i+c])
+        return final
+
+
+        
