@@ -1,0 +1,21 @@
+class Solution:
+    def isToeplitzMatrix(self, matrix: list[list[int]]) -> bool:
+
+        i = 0
+        while i < len(matrix):
+            j = 0
+
+            while j < len(matrix[0]):
+                curr = matrix[i][j]
+                tempo1 = i
+                tempo2 = j
+                while tempo2 < len(matrix[0]) and tempo1 < len(matrix):
+
+                    if matrix[tempo1][tempo2] != curr:
+                        return False
+                    tempo1 += 1
+                    tempo2 += 1
+                j += 1
+            i += 1
+
+        return True
