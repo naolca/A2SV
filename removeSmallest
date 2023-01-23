@@ -1,0 +1,15 @@
+n=int(input())
+for i in range(n):
+    length=int(input())
+    lst=map(int,input().split())
+
+    sorted_lst=sorted(lst)
+    false=False
+    for i in range(1,len(sorted_lst)):
+        if sorted_lst[i]-sorted_lst[i-1]>1:
+            false=True
+            break
+    if false:
+        print('NO')
+    else:
+        print('YES')
