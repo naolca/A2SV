@@ -1,0 +1,21 @@
+class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+
+        if c==0:
+            return True
+        lst=[i for i in range(int(math.sqrt(c))+1)]
+
+        left,right=0,len(lst)-1
+        while left<right:
+            if 2*((lst[left])**2)==c:
+                return True
+            if 2*(lst[right])**2==c:
+                return True
+            if (lst[left])**2+(lst[right])**2<c:
+                left+=1
+            elif (lst[left])**2+(lst[right])**2>c:
+                right-=1
+            else:
+                return True
+        
+        return False
