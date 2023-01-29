@@ -1,0 +1,21 @@
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # previous = None
+        # while head:
+        #     head.next, previous, head = previous, head, head.next
+        # return previous
+
+        lst=[]
+        curr=head
+        while curr:
+            lst.append(curr.val)
+            curr=curr.next
+        lst.reverse()
+
+        dummy=ListNode()
+        other=dummy
+        for i in range(len(lst)):
+            other.next=ListNode(lst[i])
+            other=other.next
+
+        return dummy.next
