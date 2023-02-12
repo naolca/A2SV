@@ -1,0 +1,25 @@
+n,m=list(map(int,input().split()))
+lst1=list(map(int,input().split()))
+lst2=list(map(int,input().split()))
+final=[]
+i=0
+j=0
+while i<n and j<m:
+    
+    if lst1[i]<=lst2[j]:
+        final.append(lst1[i])
+        i+=1
+    else:
+        final.append(lst2[j])
+        j+=1
+
+    if j>=m:
+        final+=lst1[i:]
+        break
+    if i>=n:
+        final+=lst2[j:]
+        break
+
+
+for number in final:
+    print(number,end=" ")
