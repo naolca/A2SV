@@ -1,0 +1,27 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def pairSum(self, head: Optional[ListNode]) -> int:
+        lst=[]
+        while head:
+            lst.append(head.val)
+            head=head.next
+        maximum=0
+        for i in range(len(lst)):
+            twin=self.findTwins(len(lst),i)
+            if twin==-1:
+                break
+            else:
+                if maximum<(lst[i]+lst[twin]): 
+                    maximum=(lst[i]+lst[twin])
+        return maximum
+
+
+
+    def findTwins(self,n,i):
+        if i>=0 and (n/2)-1>=i:
+            return n-1-i 
+        return -1
