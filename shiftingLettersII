@@ -1,0 +1,46 @@
+class Solution:
+    def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
+        cummulative=[0]*(len(s)+1)
+
+        for query in shifts:
+            l,r,op=query
+            # print(query)
+            if op == 1:
+                cummulative[l]+=1
+                cummulative[r+1]-=1
+            else:
+                cummulative[l]-=1
+                cummulative[r+1]+=1
+
+        summ=0
+        # print(cummulative)
+        
+        for idx,number in enumerate(cummulative):
+            summ+=number 
+            # print(summ)
+            cummulative[idx]=summ
+        final=''
+        for i in range(len(s)):
+            char=chr((((ord(s[i]) + cummulative[i]) - 97) % 26) + 97)
+            final+=char
+        # print(cummulative)
+
+        return final
+
+        
+
+
+
+
+    # def shifter(char,shift):
+    #     if shift==1:
+    #         if char=='z':
+    #             return 'a'
+    #         else:
+    #             return chr(ord(char)+1)
+    #     else:
+    #         if char == 'a':
+    #             return 'z'
+    #         else:
+    #             return chr(ord(char)-1)
+            
