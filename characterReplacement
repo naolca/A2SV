@@ -1,0 +1,25 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+
+        ans=0
+
+        left,right=0,0
+        d=defaultdict(int)
+        while right<len(s):
+            d[s[right]]+=1
+            window=right-left+1
+            while window-self.maxChar(d) > k:
+                d[s[left]]-=1
+                left+=1
+                window-=1
+            ans=max(ans,right-left+1)
+            right+=1
+        return ans
+
+
+        
+    def maxChar(self,d):
+        maximum=0
+        for key in d:
+            maximum=max(maximum,d[key])
+        return maximum
