@@ -1,0 +1,27 @@
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        
+        prefix=0
+        ans=0
+        d=defaultdict(int)
+
+
+        d[prefix]+=1
+        # print(d)
+        
+        for i in range(len(nums)):
+            prefix+=nums[i]%k
+            # offset=prefix%k
+            # other=offset+5/
+            # other_neg=-1*other
+            # print(prefix,offset,other,ans)
+            ans+=d[prefix%k]
+            # ans+=d[other]
+            # ans+=d[other_neg]
+            
+            d[prefix%k]+=1
+            # print(d)
+            
+        return ans
+        
+        
