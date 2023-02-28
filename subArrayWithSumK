@@ -1,0 +1,23 @@
+class Solution:
+    def subarraySum(self, nums: list[int], k: int) -> int:
+
+        prefix=0
+        
+        d=defaultdict(int)
+        ans=0
+        d[prefix]+=1
+        # print(d)
+
+        for i in range(len(nums)):
+            prefix+=nums[i]
+            offset=prefix-k
+            if offset in d:
+                ans+=d[offset]
+            
+            d[prefix]+=1
+            # print(d)
+        return ans
+
+
+
+        
