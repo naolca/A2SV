@@ -1,0 +1,25 @@
+class Solution:
+    def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
+
+        line = deque(tickets)
+        # line.append(line.popleft())
+
+        # print(line)
+        # seconds=0
+        # tickets_to_buy=tickets[k]
+        # while tickets_to_buy:
+        #     if line[0]>0:
+        #         line[0]-=1
+        #         seconds+=1
+        #     tickets_to_buy-=1
+        #     line.append(line.popleft())
+        # print(line)
+
+        # return seconds
+        leftImpact=0
+        rightImpact=0
+        for i in range(k+1):
+            leftImpact+=min(tickets[k],tickets[i])
+        for i in range(k+1,len(tickets)):
+            rightImpact+=min(tickets[k]-1,tickets[i])
+        return leftImpact+rightImpact
