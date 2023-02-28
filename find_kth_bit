@@ -1,0 +1,27 @@
+class Solution:
+    def findKthBit(self, n: int, k: int) -> str:
+        s1="0"
+        i=0
+        while i<n-1:
+            temp=s1
+            inverted=self.invert(s1)
+            reversed=self.reverse(inverted)
+            s1=temp+"1"+reversed
+            
+            i+=1
+        return s1[k-1]
+
+    def reverse(self,string):
+        if len(string)<=1:
+            return string
+        return string[::-1]
+    def invert(self,string):
+        
+        
+        new_string=""
+        for bit in string:
+            if bit=="0":
+                new_string+="1"
+            else:
+                new_string+="0"
+        return new_string
