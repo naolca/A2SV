@@ -1,0 +1,14 @@
+class Solution:
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        tempo = [0] * 1002
+        for n, start, end in trips:
+            tempo[start]+=n
+            if end+1<len(tempo):
+                tempo[end]-=n
+        # print(tempo)
+        runningSum=0
+        for number in tempo:
+            runningSum+=number
+            if runningSum>capacity:
+                return False
+        return True
