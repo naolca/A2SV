@@ -1,0 +1,27 @@
+class Solution:
+    def removeDuplicateLetters(self, s: str) -> str:
+        stack=[]
+        SET=set()
+        d=Counter(s)
+
+        i=0
+        while i<len(s):
+            # print(SET,s[i])
+            if s[i] not in SET:
+                while stack and s[i]<stack[-1] and d[stack[-1]]>0:
+                    SET.remove(stack.pop())
+                stack.append(s[i])
+                   
+            # print(d)
+            SET.add(s[i])
+            # stack.append(s[i])
+            d[s[i]]-=1
+            i+=1
+        return "".join(stack)
+
+
+
+        
+        
+        
+        
