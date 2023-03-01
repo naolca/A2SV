@@ -1,0 +1,14 @@
+class Solution:
+    def scoreOfParentheses(self, s: str) -> int:
+        
+        stack=[0]
+        for symbol in s:
+            if symbol=='(':
+                stack.append(0)
+            else:
+                last = stack.pop()
+                stack[-1] += 2*last if last else 1
+        return stack[0]
+        
+
+        
