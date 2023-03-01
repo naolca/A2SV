@@ -1,0 +1,15 @@
+class Solution:
+    def PredictTheWinner(self, nums: List[int]) -> bool:
+
+        def recursion(p1,p2,start,end,turn):
+
+            if start>end:
+                return p1>=p2
+            if turn:
+                return recursion(p1+nums[start],p2,start+1,end,False) or recursion(p1+nums[end],p2,start,end-1,False)
+            else:
+                return recursion(p1,p2+nums[start],start+1,end,True) and recursion(p1,p2+nums[end],start,end-1,True)
+        return recursion(0,0,0,len(nums)-1,True)
+
+
+        
