@@ -1,0 +1,21 @@
+class Solution:
+    def shortestSubarray(self, nums: list[int], k: int) -> int:
+
+
+        prefix=0
+        d=deque([[0,0]])
+        ans=float('inf')
+        for i,num in enumerate(nums):
+            prefix+=num
+            while d and prefix-d[0][0]>=k:
+                ans=min(ans,i-d.popleft()[1]+1)
+            while d and prefix<=d[-1][0]:
+                d.pop()
+            d.append([prefix,i+1])
+        
+            
+            
+            
+        # print(d)
+                
+        return ans if ans!=float('inf') else -1
