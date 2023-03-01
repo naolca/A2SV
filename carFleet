@@ -1,0 +1,21 @@
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+
+        pairs=[[position[i],speed[i]] for i in range(len(position))]
+        pairs.sort(key=lambda x:x[0])
+        # print(pairs)
+        stack=[]
+        for j in range(len(pairs)-1,-1,-1):
+            # print(stack)
+            if not stack:
+                stack.append(pairs[j])
+                continue
+            else:
+                if stack and (target-stack[-1][0])/stack[-1][1]>=(target-pairs[j][0])/pairs[j][1]:
+                    continue
+                else:
+                    stack.append(pairs[j])
+        return len(stack)
+            
+        return 0
+        
