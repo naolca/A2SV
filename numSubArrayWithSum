@@ -1,0 +1,17 @@
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        
+        d=defaultdict(int)
+        d[0]+=1
+        runningSum=0
+        ans=0
+        for r in range(len(nums)):
+            runningSum+=nums[r]
+            offset=runningSum-goal
+            ans+=d[offset]
+            d[runningSum]+=1
+        return ans
+            
+
+
+            
