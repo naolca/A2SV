@@ -1,0 +1,29 @@
+class Solution:
+    def gridGame(self, grid: List[List[int]]) -> int:
+
+        # def recursion(grid,i,turn=False):
+        #     if turn or i==len(grid)-1:
+        #         return sum(grid[0][:i+1])+sum(grid[1][i:])
+        #     choice1=recursion(grid,i+1,turn=False)
+        #     choice2=recursion(grid,i,turn=True)
+        #     # choice3=recursion(grid,len(grid)-1)
+        #     return max(choice1,choice2,choice3)
+        # return recursion(grid,0)
+        bottomPrefix=[0]
+        topPrefix=list(accumulate(grid[0]))
+        bottomPrefix+=list(accumulate(grid[1]))
+        # print(topPrefix)
+        # print(bottomPrefix)
+        min_turn=0
+        min_score=float('inf')
+        for i in range(len(grid[0])):
+            # print(i)
+            # print(min_score)
+            # print(max(topPrefix[-1]-topPrefix[i],bottomPrefix[0]-bottomPrefix[i]))
+            if max(topPrefix[-1]-topPrefix[i],bottomPrefix[i])<min_score:
+                min_turn=i
+                min_score=max(topPrefix[-1]-topPrefix[i],bottomPrefix[i])
+        # print(min_turn)
+        return min_score
+                
+        
