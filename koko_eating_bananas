@@ -1,0 +1,25 @@
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+
+        def helper(piles,speed):
+            ans=0
+            for number in piles:
+                ans+=ceil(number/speed)
+            return ans
+        l,r=1,max(piles)
+        # print(l,r)
+        rs=0
+        while l<=r:
+            mid=(l+r)//2
+            # print(l,r)
+            # print(mid)
+            if helper(piles,mid)<=h:
+                rs = mid
+                r=mid-1
+            else:
+                l=mid+1
+        # return r if helper(piles,l)<=h else r+1 
+        # print(helper(piles,3))
+        return rs
+            
+                
