@@ -1,0 +1,40 @@
+class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        
+
+        def helper(weights,capacity):
+            ans=1
+            runningSum=0
+            for i,number in enumerate(weights):
+                runningSum+=number
+                if runningSum>capacity:
+                    ans+=1
+                    runningSum=number
+            return ans
+        
+        
+        l,r=max(weights),sum(weights)
+        ans=0
+        while l<=r:
+            mid=(l+r)//2
+            print(l,r)
+            print(mid)
+            if helper(weights,mid)<=days:
+                ans=mid
+                r=mid-1
+                
+            else:
+                l=mid+1
+        # print(l)
+        # print(helper(weights,55))
+        
+        return ans
+        
+
+        # if helper(weights,l)<days:
+        #     return l-1
+        # elif helper(weights,l)==days:
+        #     return l
+        # elif helper(weights,l)>days:
+        #     return l+1
+        
