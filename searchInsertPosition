@@ -1,0 +1,7 @@
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        if target>nums[-1]:
+            return len(nums)
+        return bisect_left(nums,target,0,len(nums)-1)
+
+        # return bisect_right(nums,target,0,len(nums)-1)-1
