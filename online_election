@@ -1,0 +1,47 @@
+class TopVotedCandidate:
+
+    def __init__(self, persons: List[int], times: List[int]):
+        # self.persons=persons
+        # self.times=times
+        d=defaultdict(int)
+        curr_max=-1
+        # self.stack=[]
+        # d[curr_max]+=1
+        for i in range(len(persons)):
+            if curr_max==-1:
+                curr_max=persons[0]
+                d[curr_max]+=1
+                persons[i]=curr_max
+                
+            else:
+                d[persons[i]]+=1
+                if d[curr_max]<=d[persons[i]]:
+                    curr_max=persons[i]
+                    # persons[i]=curr_max
+                else:
+                    persons[i]=curr_max
+            # print(i,curr_max)
+            # self.stack.append(curr_max)
+        # print(persons)
+        self.persons=persons
+        self.times=times
+             
+            
+            
+        
+
+    def q(self, t: int) -> int:
+        # print(self.persons)
+        # print(self.stack)
+        # print(t,bisect_left(self.times,t))
+
+        return self.persons[bisect_right(self.times,t)-1]
+
+
+        
+        
+
+
+# Your TopVotedCandidate object will be instantiated and called as such:
+# obj = TopVotedCandidate(persons, times)
+# param_1 = obj.q(t)
