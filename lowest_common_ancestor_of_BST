@@ -1,0 +1,53 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        seen=set()
+        dummy=root
+        while dummy:
+            # print(dummy.val)
+            if dummy.val<p.val:
+                seen.add(dummy)
+                dummy=dummy.right
+            elif dummy.val>p.val:
+                seen.add(dummy)
+                dummy=dummy.left
+            elif dummy.val==p.val:
+                seen.add(dummy)
+                break
+        dummy=root
+        ans=[]
+        # print(dummy.val)
+        while dummy:
+            # print(dummy.val)
+            if dummy in seen:
+                ans.append(dummy)
+            if dummy.val<q.val:
+                dummy=dummy.right
+            elif dummy.val>q.val:
+                dummy=dummy.left
+            else:
+                if dummy in seen:
+                    ans.append(dummy)
+                break
+        
+        # print(ans)
+        return ans[-1]
+        
+
+        # print(seen)
+        
+
+
+    # def traverser(self,root,val):
+    #     seen=set()
+    #     if not node:
+    #         return  seen
+    #     if root.val<val:
+    #         seen.add(self.traverser(self,root.right.val))
+        
