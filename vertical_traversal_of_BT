@@ -1,0 +1,139 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def helper(self,root,matrix,row=500,col=500):
+        if(root==None):
+            return
+        
+        matrix[row][col].append(root.val)
+        matrix[row][col].sort()
+        self.helper(root.left,matrix,row+1,col-1)
+        self.helper(root.right,matrix,row+1,col+1)
+    def depth(self,root):
+        if not root:return 0
+        return max(1+self.depth(root.left),1+self.depth(root.right))
+        # return recursion(root)    
+    
+
+
+    def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
+        dic={}
+        strech=self.depth(root)
+        matrix=[[[] for i in range(2*strech)] for i in range(2*strech)]
+        
+        self.helper(root,matrix,(2*strech)//2,(2*strech)//2)
+        # print(matrix)
+        # print(dic)
+        keys=sorted(dic.keys())
+        final=[]
+        for col in range(len(matrix[0])):
+            temp=[]
+            for row in range(len(matrix)):
+                if matrix[row][col]:
+                    temp+=matrix[row][col]
+            if temp:
+
+                final.append(temp)
+                
+        return final
+            
+        # res=[]
+        # q=deque([root])
+        # if not root:
+        #     return []
+        # while q:
+        #     nodes=[]
+        #     temp=[]
+        #     while q:
+        #         curr=q.pop()
+        #         if not curr:
+        #             temp.append(curr)
+        #         else:
+        #             temp.append(curr.val)
+        #         nodes.append(curr)
+
+        #     res.append(temp)
+        #     for node in nodes:
+        #         if node:
+        #             q.appendleft(node.left)
+        #             q.appendleft(node.right)
+        # # res.pop()
+        # # print(res)
+        # d=defaultdict(list)
+        # d[0].append(res[0][0])
+        # res[0]=[0]
+        # for j in range(1,len(res)):
+        #     l,r=0,1
+        #     # print(res[j],res[j-1])
+        #     for coordinate in res[j-1]:
+                
+        #         if r<len(res[j]):
+        #             d[coordinate-1].append(res[j][l])
+        #             d[coordinate+1].append(res[j][r])
+                    
+        #             res[j][l]=coordinate-1
+        #             res[j][r]=coordinate+1
+        #         l+=2
+        #         r+=2
+        # # print(res)
+        # # print(d)
+        
+        # my_list=list(d.keys())
+        # my_list.sort()
+        # nones=[]
+        # # print(d)
+        # for key in my_list:
+        #     temp=[]
+        #     for val in d[key]:
+        #         if val!=None:
+        #             temp.append(val)
+        #     if temp:
+        #         d[key]=temp
+        #     else:
+        #         del d[key]      
+        # final=[]
+        # # print(d)
+        # for key in my_list:
+        #     if d[key]:
+            
+        #         final.append(sorted(d[key]))
+        # return final
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
