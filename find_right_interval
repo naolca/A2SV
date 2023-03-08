@@ -1,0 +1,44 @@
+class Solution:
+    def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
+        # the sort should
+        # - minimize starts
+        # - maximize ends
+        starts=[i[0] for i in intervals]
+        d={}
+        for i in range(len(starts)):
+            d[starts[i]]=i
+        # print(starts)
+        # print(d)
+        starts.sort()
+        finals=[]
+        
+        # l,r=0,len(intervals)-1
+        
+        for pair in intervals:
+            l,r=0,len(starts)-1
+            ans=float('inf')
+            while l<=r:
+                mid=(l+r)//2
+                if starts[mid]>=pair[1]:
+                    ans=starts[mid]
+                    r=mid-1
+                else:
+                    l=mid+1
+            if ans!=float('inf'):
+                finals.append(d[ans])
+            else:
+                finals.append(-1)
+            
+
+            
+        return finals
+    
+
+
+
+    # def binary_search(self,lst,pair):
+    #     lst.sort(key=lambda x:x[0])
+    #     l,r=0,len(lst)-1
+    #     ans=0
+    #     while l<r:
+    #         if lst
