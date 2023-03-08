@@ -1,0 +1,31 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+
+    def averageOfSubtree(self, root: Optional[TreeNode]) -> int:
+        return self.traverser(root,0)[2]
+        
+        
+    
+
+
+    def traverser(self,node,number=0):
+        #return [sum , number of nodes below]
+        if not node:
+            return [0,0,0]
+        left_summ,left_nodes,left_number=self.traverser(node.left)
+        # left_nodes=self.traverser(node.left)[1]
+        right_summ,right_nodes,right_number=self.traverser(node.right)
+
+        # right_nodes=self.traverser(node.right)[1]
+        this_number=left_number+right_number
+        # print((left_summ+right_summ+node.val)//(left_nodes+right_nodes+1),node.val)
+        if (left_summ+right_summ+node.val)//(left_nodes+right_nodes+1)==node.val:
+            return [left_summ+right_summ+node.val,left_nodes+right_nodes+1,this_number+1]
+        else:
+            return [left_summ+right_summ+node.val,left_nodes+right_nodes+1,this_number]
+
