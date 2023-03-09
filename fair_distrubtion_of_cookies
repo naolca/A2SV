@@ -1,0 +1,22 @@
+class Solution:
+    def distributeCookies(self, cookies: List[int], k: int) -> int:
+        fairness = sys.maxsize
+
+        def backtrack(idx , arr):
+            nonlocal fairness
+            if idx == len(cookies):
+                if min(arr) != 0:
+                    fairness = min(fairness , max(arr))
+                return
+            count_zeros = arr.count(0)
+            rem_cookies = len(cookies) - idx
+            if count_zeros> rem_cookies:
+                return
+            
+            for i in range(len(arr)):
+                new_arr = arr.copy()
+                new_arr[i] += cookies[idx]
+                backtrack(idx+1, new_arr)
+        backtrack(0  , [0]*k)
+        return fairness
+
