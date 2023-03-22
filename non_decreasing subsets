@@ -1,0 +1,15 @@
+class Solution:
+    def findSubsequences(self, nums: List[int]) -> List[List[int]]:
+
+        res={}
+        def dfs(i,lst):
+            if len(lst)>=2:
+                res[tuple(lst)]=1
+                
+            for number in range(i,len(nums)):
+                if nums[number]>=lst[-1]:
+                    dfs(number+1,lst+[nums[number]])
+        
+        for i in range(len(nums)):
+            dfs(i+1,[nums[i]])
+        return res.keys()
