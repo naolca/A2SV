@@ -1,0 +1,18 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        
+        def quicksort(lst):
+            if len(lst)<=1:
+                return lst
+            pivot=lst.pop()
+            lefthalf=[]
+            righthalf=[]
+            for i in range(len(lst)):
+                if lst[i]<pivot:
+                    lefthalf.append(lst[i])
+                else:
+                    righthalf.append(lst[i])
+            return quicksort(lefthalf) + [pivot] + quicksort(righthalf)
+        # arr=nums[:]
+        
+        return quicksort(nums)[-k]
