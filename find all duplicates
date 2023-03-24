@@ -1,0 +1,14 @@
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+
+        d=defaultdict(int)
+        
+        for number in nums:
+            d[number]+=1
+        
+        final=[]
+
+        for key in d:
+            if d[key]>1:
+                final.append(key)
+        return final
