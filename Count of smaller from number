@@ -1,0 +1,85 @@
+class Solution:
+    def merge(self, left, right):
+        i, j = 0, 0
+        m, n = len(left), len(right)
+        while i < m:
+            while j < n and left[i] > 2*right[j]:
+                j += 1
+            self.d[left[i]] += j
+            i += 1
+        
+        i, j = 0, 0
+        temp = []
+        # print(left,right)
+        while i < m and j < n:
+            if left[i][0] < right[j][0]:
+                temp.append(left[i])
+                i += 1
+            elif left[i][0]==right[j][0]:
+                temp.append(right[j])
+                j += 1
+            else:
+                # self.d[left[i]]+=1
+                # for key in self.d:
+                #     if key[0]>left[i][0] and key[1]<left[i][1]:
+                #         self.d[key]+=1  
+                temp.append(right[j])
+                j += 1
+        
+        while i < m:
+            temp.append(left[i])
+            i += 1
+        while j < n:
+            temp.append(right[j])
+            j += 1
+        # print(temp)
+        # print(self.d)
+        return temp
+    
+    def mergesort(self, nums):
+        if len(nums) <= 1:
+            return nums
+        mid = len(nums) // 2
+        left, right = self.mergesort(nums[:mid]), self.mergesort(nums[mid:])
+        return self.merge(left, right)
+    
+    # def reversePairs(self, nums: List[int]) -> int:
+    #     self.ans = 0
+    #     _ = self.mergesort(nums)
+    #     return self.ans
+    def countSmaller(self, nums: List[int]) -> List[int]:
+        self.d=defaultdict(int)
+        for i in range(len(nums)):
+            nums[i]=(nums[i],i)
+            self.d[nums[i]]=0
+        print(nums)
+        _ = self.mergesort(nums)
+        for key in self.d:
+            nums[key[1]]=self.d[key] 
+        return nums
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
