@@ -1,0 +1,30 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+
+        self.ans=[]
+        n=(1<<len(nums))-1
+        self.permutation_finder(nums,n,0,[])
+        return self.ans
+
+        # res=[]
+        
+        # if len(nums)==1:
+        #     return [[nums[0]]]
+        # for i in range(len(nums)):
+        #     n=nums.pop(0)
+        #     perms=self.permute(nums)
+        #     for perm in perms:
+        #         perm.append(n)
+        #     res.extend(perms)
+        #     nums.append(n)
+        # return res
+
+    def permutation_finder(self,nums,n,curr_mask,curr_perm):
+        if curr_mask==n:
+            self.ans.append(curr_perm)
+            return
+        for i in range(len(nums)):
+            if not (1<<i)&curr_mask:
+                curr_perm.append(nums[i])
+                self.permutation_finder(nums,n,curr_mask | (1<<i),curr_perm.copy())
+                curr_perm.pop()
