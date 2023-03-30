@@ -1,0 +1,41 @@
+import sys,math
+t=int(input())
+for _ in range(t):
+    
+    
+    num=int(input())
+    s = str(bin(num))[2:]
+    if s.count('1')>1:
+        k=0
+        # print(num,' it got here')
+        while not (1<<(k) & num):
+            k+=1
+        print(2**k)
+    else:
+        # print(num,' it got here')
+        k=0
+        while not (1<<(k) & num):
+            k+=1
+        if k==0:
+            print(3)
+        else:
+            print((2**k)+1)
+        
+    # if type(math.log(num,2))==type(2):
+    #     k=1
+    #     while True:
+    #         if 1<<(k-1)^num:
+    #             if num & k:
+    #                 print(k)
+    #                 break
+    #         k+=1
+    # else:
+    #     k=1
+    #     while True:
+    #         if 1<<(k-1) & num:
+    #             print(k)
+    #             break
+    #         k+=1
+        
+        
+    
