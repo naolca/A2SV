@@ -1,0 +1,18 @@
+class Solution:
+    def distinctPrimeFactors(self, nums: List[int]) -> int:
+        prod=1
+        factors=set()
+        for number in nums:
+            prod=number
+            
+            d=2
+            while d*d<=prod:
+                while prod%d==0:
+                    prod//=d
+                    factors.add(d)
+                d+=1
+            if prod>1:
+                factors.add(prod)
+        return len(factors)
+        
+            
