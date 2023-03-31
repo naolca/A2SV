@@ -1,0 +1,18 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+         
+         d=Counter(nums)
+
+         frequents=sorted(d,key=lambda x:d[x],reverse=True)
+
+         return [frequents[i] for i in range(k)]
+
+            
+            
+            
+            
+        
+            
+        
+            
+        
