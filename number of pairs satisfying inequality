@@ -1,0 +1,49 @@
+class Solution:
+    def merge(self, left, right):
+        i, j = 0, 0
+        m, n = len(left), len(right)
+        # print(left,right)
+        while j < n:
+            while i < m and left[i]<=right[j]+self.diff:
+                i+=1
+            self.ans+=i
+            j+=1
+        
+        i, j = 0, 0
+        temp = []
+        while i < m and j < n:
+            if left[i] < right[j]:
+                temp.append(left[i])
+                i += 1
+            else:
+                temp.append(right[j])
+                j += 1
+        
+        while i < m:
+            temp.append(left[i])
+            i += 1
+        while j < n:
+            temp.append(right[j])
+            j += 1
+        
+        return temp
+    
+    def mergesort(self, nums):
+        if len(nums) <= 1:
+            return nums
+        mid = len(nums) // 2
+        left, right = self.mergesort(nums[:mid]), self.mergesort(nums[mid:])
+        return self.merge(left, right)
+    
+    
+    def numberOfPairs(self, nums1: List[int], nums2: List[int], diff: int) -> int:
+        self.ans=0
+        self.nums2=nums2
+        self.nums1=nums1
+        for i in range(len(nums2)):
+            nums1[i]=nums1[i]-nums2[i]
+        self.nums2=nums2
+        self.nums1=nums1
+        self.diff=diff
+        _=self.mergesort(self.nums1)
+        return self.ans
