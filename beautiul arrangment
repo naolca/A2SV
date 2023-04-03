@@ -1,0 +1,28 @@
+class Solution:
+    def countArrangement(self, n: int) -> int:
+
+        nums=[i for i in range(1,n+1)]
+        ans=0
+        n=(1<<len(nums))-1
+        
+        
+
+        
+        def permutation_finder(nums,n,curr_mask,curr_perm):
+            nonlocal ans
+            if curr_perm and (curr_perm[-1]%len(curr_perm) and len(curr_perm)%curr_perm[-1]):
+                return
+            if curr_mask==n:
+                ans+=1
+                return
+            for i in range(len(nums)):
+                if not (1<<i)&curr_mask:
+                    curr_perm.append(nums[i])
+                    permutation_finder(nums,n,curr_mask | (1<<i),curr_perm.copy())
+                    curr_perm.pop()
+        permutation_finder(nums,n,0,[])
+        return ans
+
+
+
+       
