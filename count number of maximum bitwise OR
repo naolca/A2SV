@@ -1,0 +1,28 @@
+class Solution:
+    def countMaxOrSubsets(self, nums: List[int]) -> int:
+
+
+        def classical_iterative(elems):
+            powerset_size = 2**len(elems)
+            counter = 0
+            j = 0
+        
+            for counter in range(0, powerset_size):
+                results = []
+                for j in range(0, len(elems)):
+                    if((counter & (1 << j)) > 0):
+                        results.append(elems[j])
+                yield results
+
+        subsets=classical_iterative(nums)
+     
+        d=defaultdict(list)
+        # print(subsets)
+        for subset in subsets:
+            xor=0
+            for number in subset:
+                xor|=number
+            d[xor].append(subset)
+        # print(d)
+        maxx=max(d.keys())
+        return len(d[maxx])
