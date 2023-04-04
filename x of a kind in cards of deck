@@ -1,0 +1,31 @@
+class Solution:
+    def hasGroupsSizeX(self, deck: List[int]) -> bool:
+
+
+        def gcd(a,b):
+            if b==0:
+                return a
+            return gcd(b,a%b)
+
+
+        d=Counter(deck)
+        minn=min(d.values())
+        if minn<=1:
+            return False
+        lst=list(d.values())
+        if len(d)==1 and lst[0]>1:
+            return True
+        # for key in d:
+        #     if d[key]%minn:
+        #         return False
+        # return True
+        
+
+        GCD=gcd(lst[0],lst[1])
+        for i in range(2,len(lst)):
+            GCD=gcd(lst[i],GCD)
+        if GCD==1:
+            return False
+        return True
+
+        
