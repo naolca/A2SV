@@ -1,0 +1,25 @@
+class Solution:
+    def maxProduct(self, words: List[str]) -> int:
+
+        d=defaultdict(int)
+        chars='abcdefghijklmnopqrstuvwxyz'
+        for i in range(len(chars)):
+            d[chars[i]]=i
+        temp=words[:]
+        for i in range(len(words)):
+            curr=0
+            for char in words[i]:
+                curr|=(1<<d[char])
+            words[i]=curr
+            
+        # print(words)
+        maxx=0
+        # print(words)
+        for i in range(len(words)):
+            for j in range(i+1,len(words)):
+                if words[i]&words[j] == 0:
+                    # print(words[i],words[i].bit_count())
+                    # print(words[j],words[j].bit_count())
+                    maxx=max(maxx,len(temp[i])*len(temp[j]))
+            
+        return maxx
