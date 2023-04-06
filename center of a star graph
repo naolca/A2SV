@@ -1,0 +1,16 @@
+class Solution:
+    def findCenter(self, edges: List[List[int]]) -> int:
+        
+        def buildGraph(edges):
+            d=defaultdict(list)
+            for [node,neighboor] in edges:
+                d[node].append(neighboor)
+                d[neighboor].append(node)
+            return d
+        d=buildGraph(edges)
+        n=len(d)
+        for key in d:
+            if len(d[key])==n-1:
+                return key
+        
+        
