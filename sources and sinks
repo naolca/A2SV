@@ -1,0 +1,22 @@
+matrix=[]
+for i in range(int(input())):
+    row=list(map(int,input().split()))
+    matrix.append(row)
+src=[]
+sinks=[]
+for i in range(len(matrix)):
+    if matrix[i]==[0]*len(matrix[0]):
+        src.append(i+1)
+for i in range(len(matrix[0])):
+    flag=False
+    for j in range(len(matrix)):
+        if matrix[j][i]!=0:
+            flag=True
+            break
+    if not flag:
+        sinks.append(i+1)
+
+print(len(sinks),end=' ')
+print(*sinks)
+print(len(src),end=' ')
+print(*src)
