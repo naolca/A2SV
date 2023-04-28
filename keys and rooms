@@ -1,0 +1,50 @@
+class Solution(object):
+    def openLock(self, deadends, target):
+        """
+        :type deadends: List[str]
+        :type target: str
+        :rtype: int
+        """
+        seen = set(["0000"])
+        deadends = set(deadends)
+        queue = deque([("0000",0)])
+        if "0000" in deadends:
+            return -1
+        while queue:
+
+            curr_comb, curr_level = queue.pop()
+            # print(curr_comb == target)
+            # print(curr_comb,target)
+            if curr_comb == target:
+                return curr_level
+
+            for i in range(4):
+                if curr_comb[i]=="9" or curr_comb[i]=="0":
+                    if curr_comb[i]=="9":
+                        new_comb_right = curr_comb[:i] + "0" + curr_comb[i+1:]
+                        new_comb_left= curr_comb[:i] + "8" + curr_comb[i+1:]
+                    else:
+                        new_comb_right = curr_comb[:i] + "1" + curr_comb[i+1:]
+                        new_comb_left= curr_comb[:i] + "9" + curr_comb[i+1:]
+                else:
+                    # print(curr_comb[i])
+                    new_comb_right = curr_comb[:i] + str(int(curr_comb[i])+1)+ curr_comb[i+1:]
+                    new_comb_left= curr_comb[:i] + str(int(curr_comb[i])-1)+ curr_comb[i+1:]
+
+                    
+                
+                # print("got here")
+                # print(len(curr_comb))
+                if new_comb_left not in deadends and new_comb_left not in seen:
+                    queue.appendleft((new_comb_left, curr_level+1))
+                    seen.add(new_comb_left)
+                if new_comb_right not in deadends and new_comb_right not in seen:
+                    queue.appendleft((new_comb_right, curr_level+1))
+                    seen.add(new_comb_right)
+                
+        return -1
+             
+
+
+        
+        
