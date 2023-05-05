@@ -1,0 +1,62 @@
+class LockingTree:
+
+    def __init__(self, parent: List[int]):
+        self.parent=parent
+        self.tree=defaultdict(lambda:{"children":[],"locked":[False,None]})
+        for i,e in enumerate(parent):
+            if e==-1:
+                continue
+            self.tree[e]["children"].append(i)
+            self.tree[e]["locked"]=[False,None]
+        
+        
+
+    def lock(self, num: int, user: int) -> bool:
+        if self.tree[num]["locked"][0]:
+            return False
+        self.tree[num]["locked"]=[True,user]
+        return True
+        
+
+    def unlock(self, num: int, user: int) -> bool:
+        if self.tree[num]["locked"][0] and self.tree[num]["locked"][1]==user:
+            self.tree[num]["locked"]=[False,None]
+            return True
+        return False
+
+    def upgrade(self, num: int, user: int) -> bool:
+
+        if self.tree[num]["locked"][0]:
+            return False
+
+        temp=num
+        while temp!=-1:
+            if self.tree[self.parent[temp]]["locked"][0]:
+                return False
+            temp=self.parent[temp]
+        
+        if len(self.tree[num]["children"])==0:
+            
+            return False
+        q=self.tree[num]["children"].copy()
+        decendant_to_unlock=[]
+        while(q):
+            temp=q.pop(0)
+            if self.tree[temp]["locked"][0]:
+                decendant_to_unlock.append(temp)
+            q.extend(self.tree[temp]["children"])
+        if decendant_to_unlock:
+            for i in decendant_to_unlock:
+                self.tree[i]["locked"]=[False,None]
+            self.lock(num,user)
+            return True
+        return False
+                
+        
+
+
+# Your LockingTree object will be instantiated and called as such:
+# obj = LockingTree(parent)
+# param_1 = obj.lock(num,user)
+# param_2 = obj.unlock(num,user)
+# param_3 = obj.upgrade(num,user)
