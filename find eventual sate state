@@ -1,0 +1,52 @@
+class Solution:
+
+    def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+
+        d = defaultdict(list)
+        for i in range(len(graph)):
+            if graph[i]:
+                d[i] = graph[i]
+
+        colors = [0 for i in range(len(graph))]
+
+        #0 = not_visited
+        # 1 = call_Stack
+        # 2 = visited
+
+
+        def dfs(node):
+
+            if colors[node] == 1:
+                return True
+            if colors[node] == 2:
+                return False
+            colors[node] = 1
+            for child in d[node]:
+                if dfs(child):
+                    return True
+            colors[node] = 2
+            return False
+        ans = []
+        for i in range(len(graph)):
+            if not dfs(i):
+                ans.append(i)
+        return ans
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
