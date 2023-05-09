@@ -1,0 +1,31 @@
+class Solution:
+    def findAllRecipes(self, recipes: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
+        d = defaultdict(list)
+        recipes_needed = [0]*len(recipes)
+        
+
+        #count the number of recipes needed by every recipe
+        for i in range(len(recipes)):
+            recipes_needed[i]+=len(ingredients[i])
+            ing = ingredients[i]
+            for f in ing:
+                d[f].append(i)
+        todo=deque(supplies)
+        res = []
+        # print(recipes_needed)
+        # print(d)
+        while todo:
+            curr = todo.pop()
+            for recipe in d[curr]:
+                recipes_needed[recipe]-=1
+
+                if recipes_needed[recipe] == 0:
+                    res.append(recipes[recipe])
+                    todo.appendleft(recipes[recipe])
+        return res
+            
+
+
+        
+        
+        
