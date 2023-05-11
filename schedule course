@@ -1,0 +1,28 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        d=defaultdict(list)
+        pres = [0]*numCourses
+
+        for course, prerequisite in prerequisites:
+            d[prerequisite].append(course)
+            pres[course]+=1
+
+        todos = deque()
+        for i in range(numCourses):
+            if pres[i] == 0:
+                todos.appendleft(i)
+
+        ans = []
+        while todos:
+
+            curr = todos.pop()
+            ans.append(curr)
+
+            for nei in d[curr]:
+                pres[nei]-=1
+                if pres[nei] == 0:
+                    todos.appendleft(nei)
+
+        if len(ans) == numCourses:
+            return True
+        return False
