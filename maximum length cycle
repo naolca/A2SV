@@ -1,0 +1,53 @@
+class Solution:
+    def longestCycle(self, edges: List[int]) -> int:
+        
+        d = defaultdict(list)
+        seen = set()
+        
+        n = len(edges)
+        indegrees = [0 for i in range(n)]
+
+        for i in range(n):
+            if edges[i] != -1:
+                d[i].append(edges[i])
+                indegrees[edges[i]] += 1
+                # indegrees[i] += 1
+        todo = deque()
+        # print(indegrees)
+        # print(d)
+
+
+        for i in range(n):
+            if indegrees[i] == 0:
+                todo.appendleft(i)
+                seen.add(i)
+        while todo:
+            curr = todo.pop()
+
+            for i in d[curr]:
+                indegrees[i] -= 1
+                # print(i)
+                # print(indegrees)
+                
+                if indegrees[i] == 0:
+                    seen.add(i)
+                    todo.appendleft(i)
+        res = -1
+        for i in range(n):
+            if indegrees[i] != 0:
+                path = 0
+                while indegrees[i] != 0:
+                    indegrees[i] -= 1
+                    i = edges[i]
+                    path+=1
+                res = max(res, path)
+        return res
+                
+
+
+                    
+
+            
+        
+                
+            
