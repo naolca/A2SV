@@ -1,0 +1,31 @@
+from collections import defaultdict,deque
+def parallelCourses(n, prerequisites):
+    # Write your code here.
+    d = defaultdict(list)
+    pres = [0 for i in range(n+1)]
+    pres[0] = 10
+    for pre, course in prerequisites:
+        d[pre].append(course)
+        pres[course] += 1
+    todo = deque()
+    seen = set()
+    for i in range(n+1):
+        if pres[i] == 0:
+            todo.appendleft(i)
+            seen.add(i)
+    topoSort = []
+    ans = 0
+    while todo:
+        for _ in range(len(todo)):
+            curr = todo.pop()
+            topoSort.append(curr)
+            for course in d[curr]:
+                pres[course] -= 1
+                if pres[course] == 0:
+                    seen.add(course)
+                    todo.appendleft(course)
+        ans += 1
+    if len(topoSort) == n:
+        return ans
+    return -1
+            
