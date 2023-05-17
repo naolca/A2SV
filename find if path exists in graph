@@ -1,0 +1,31 @@
+
+class unionFind:
+    def __init__(self, size):
+        self.parent = {i:i for i in range(size)}
+        # self.rank = [1] * n
+    def find_parent(self, child):
+        # print(child)
+        while child != self.parent[child]:
+            child = self.parent[child]
+        return child
+    def union(self,bro, sis):
+        bro_parent = self.find_parent(bro)
+        sis_parent = self.find_parent(sis)
+        if bro_parent != sis_parent:
+            self.parent[bro_parent] = sis_parent
+            # self.rank[sis_parent] += self.rank[bro_parent]
+    def is_connected(self, a, b):
+        return self.find_parent(a) == self.find_parent(b)
+
+
+
+
+class Solution:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+
+        data_structure = unionFind(n)
+        for f, t in edges:
+            data_structure.union(f, t)
+        return data_structure.is_connected(source, destination)
+
+        
