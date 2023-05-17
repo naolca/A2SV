@@ -1,0 +1,34 @@
+class unionFind:
+    def __init__(self, size):
+        self.parent = {i:i for i in range(1, size + 1)}
+        # self.rank = [1] * n
+    def find_parent(self, child):
+        # print(child)
+        while child != self.parent[child]:
+            child = self.parent[child]
+        return child
+    def union(self,bro, sis):
+        bro_parent = self.find_parent(bro)
+        sis_parent = self.find_parent(sis)
+        if bro_parent != sis_parent:
+            self.parent[bro_parent] = sis_parent
+            # self.rank[sis_parent] += self.rank[bro_parent]
+    def is_connected(self, a, b):
+        return self.find_parent(a) == self.find_parent(b)
+
+
+class Solution:
+    def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+
+        res = []
+        disjointSet = unionFind(len(edges))
+        for f, t in edges:
+            t_parent = disjointSet.find_parent(t)
+            f_parent = disjointSet.find_parent(f)
+            if t_parent == f_parent:
+                res = [f, t]
+                continue
+            else:
+                disjointSet.union(f, t)
+        return res
+            
