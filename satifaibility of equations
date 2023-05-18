@@ -1,0 +1,69 @@
+class disjointSet:
+    def __init__(self) -> None:
+        chars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+        self.root = { i: i for i in chars}
+        self.size = { i: 1 for i in chars }
+
+    def find(self, node):
+        hold = node
+        # print(node)
+        # print(self.root)
+        # print(self.rank)
+        
+        while node != self.root[node]:
+            node = self.root[node]
+        while hold != self.root[hold]:
+            hold = self.root[hold]
+            self.root[hold] = node
+        return self.root[node]
+
+    def union(self, x, y):
+        # print(x, y)
+        rootX = self.find(x)
+        rootY = self.find(y)
+        if rootX == rootY:
+            return
+        if self.size[rootX] <= self.size[rootY]:
+            self.root[rootX] = rootY
+            self.size[rootY] += self.size[rootX]
+        else:
+            self.root[rootY] = rootX
+            self.size[rootX] += self.size[rootY]
+        
+     
+    def are_connected(self, x, y):
+        return self.find(x) == self.find(y)
+
+
+class Solution:
+    def equationsPossible(self, equations: List[str]) -> bool:
+        graph = disjointSet()
+        for eq in equations:
+            x, sign, _, y = eq[0], eq[1], eq[2], eq[3]
+            if sign == "=":
+                graph.union(x, y)
+            
+        for eq in equations:
+            x, sign, _, y = eq[0], eq[1], eq[2], eq[3]
+            if sign == "!":
+                if graph.are_connected(x, y):
+                    return False
+        return True
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
