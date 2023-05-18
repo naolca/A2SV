@@ -1,0 +1,63 @@
+class disjointSet:
+    def __init__(self, size) -> None:
+
+        self.root = [i for i in range(size)]
+        self.size = [1 for i in range(size)]
+
+    def find(self, node):
+        hold = node
+        # print(node)
+        # print(self.root)
+        # print(self.rank)
+        
+        while node != self.root[node]:
+            node = self.root[node]
+        while hold != self.root[hold]:
+            hold = self.root[hold]
+            self.root[hold] = node
+        return self.root[node]
+
+    def union(self, x, y):
+        # print(x, y)
+        rootX = self.find(x)
+        rootY = self.find(y)
+        if rootX == rootY:
+            return
+        if self.size[rootX] <= self.size[rootY]:
+            self.root[rootX] = rootY
+            self.size[rootY] += self.size[rootX]
+        else:
+            self.root[rootY] = rootX
+            self.size[rootX] += self.size[rootY]
+        
+     
+    def are_connected(self, x, y):
+        return self.find(x) == self.find(y)
+
+
+class Solution:
+    def removeStones(self, stones: List[List[int]]) -> int:
+        graph = disjointSet(len(stones))
+        for i in range(len(stones)):
+            r, c = stones[i][0], stones[i][1]
+            for j in range(i+1, len(stones)):
+                new_r, new_c = stones[j][0], stones[j][1]
+                if r == new_r or c == new_c:
+                    graph.union(i, j)
+        seen = set()
+        ans = 0
+        for i in range(len(stones)):
+            seen.add(graph.find(i))
+        for num in seen:
+            ans += graph.size[num] - 1
+        return ans
+
+
+
+
+
+
+
+
+
+
