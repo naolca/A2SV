@@ -1,0 +1,54 @@
+class disjointSet:
+    def __init__(self) -> None:
+        chars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+        self.root = { i: i for i in chars}
+        self.size = { i: 1 for i in chars }
+        self.minn = { i: i for i in chars }
+
+    def find(self, node):
+        hold = node
+        # print(node)
+        # print(self.root)
+        # print(self.rank)
+        
+        while node != self.root[node]:
+            node = self.root[node]
+        while hold != self.root[hold]:
+            hold = self.root[hold]
+            self.root[hold] = node
+        return self.root[node]
+
+    def union(self, x, y):
+        # print(x, y)
+        rootX = self.find(x)
+        rootY = self.find(y)
+        if rootX == rootY:
+            return
+        if self.size[rootX] <= self.size[rootY]:
+            self.root[rootX] = rootY
+            self.size[rootY] += self.size[rootX]
+            self.minn[rootY] = min(self.minn[rootY], self.minn[rootX])
+        else:
+            self.root[rootY] = rootX
+            self.size[rootX] += self.size[rootY]
+            self.minn[rootX] = min(self.minn[rootX], self.minn[rootY])
+        
+     
+    def is_connected(self, x, y):
+        return self.find(x) == self.find(y)
+
+
+
+class Solution:
+    def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
+        graph = disjointSet()
+
+        for i in range(len(s1)):
+            graph.union(s1[i], s2[i])
+        ans = []
+        for char in baseStr:
+            root = graph.find(char)
+            # print(char, root,graph.minn[char])
+            ans.append(graph.minn[root])
+        return "".join(ans)
+
