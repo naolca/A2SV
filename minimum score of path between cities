@@ -1,0 +1,81 @@
+class disjointSet:
+    def __init__(self, size) -> None:
+
+        self.root = [i for i in range( size + 1)]
+        self.size = [1 for _ in range(size + 1)]
+        self.minn = [float('inf') for i in range(size + 1)]
+
+    def find(self, node):
+        hold = node
+        # print(node)
+        # print(self.root)
+        # print(self.rank)
+        
+        while node != self.root[node]:
+            node = self.root[node]
+        while hold != self.root[hold]:
+            hold = self.root[hold]
+            self.root[hold] = node
+        return self.root[node]
+
+    def union(self, x, y):
+        # print(x, y)
+        rootX = self.find(x)
+        rootY = self.find(y)
+        if rootX == rootY:
+            return
+        if self.size[rootX]<= self.size[rootY]:
+            self.root[rootX] = rootY
+            self.size[rootY] += self.size[rootX]
+            self.minn[rootY] = min(self.minn[rootY], self.minn[rootX])
+        else:
+            self.root[rootY] = rootX
+            self.size[rootX] += self.size[rootY]
+            self.minn[rootX] = min(self.minn[rootX], self.minn[rootY])
+        
+        # if self.rank[rootX] == self.rank[rootY]:
+        #     self.rank[rootX] += 1
+        # if self.rank[rootX] > self.rank[rootY]:
+        #     self.root[rootY] = rootX
+        # else:
+        #     self.root[rootX] = rootY
+    def is_connected(self, x, y):
+        return self.find(x) == self.find(y)
+
+
+
+class Solution:
+    def minScore(self, n: int, roads: List[List[int]]) -> int:
+
+            graph = disjointSet(n)
+            
+            for f, t, c in roads:
+                graph.union(f, t)
+                rootF = graph.find(f)
+                graph.minn[rootF] = min(graph.minn[rootF], c)
+            return graph.minn[graph.find(1)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
