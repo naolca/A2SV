@@ -1,0 +1,28 @@
+class Solution:
+    def longestPath(self, parent: List[int], s: str) -> int:
+        d = defaultdict(list)
+        
+        for i in range(1, len(parent)):
+            d[parent[i]].append(i)
+        
+        ans = 0 
+        
+        def dfs(node, parent):
+            nonlocal ans
+            first,sec = 0,0  
+            
+            for nei in d[node]:
+                st = dfs(nei, node)
+                if s[nei] != s[node]:
+                    if st > first: 
+                        sec = first
+                        first = st
+                    elif st == first or st > sec: 
+                        sec = st
+                            
+            ans = max(ans, first+sec+1)
+            return first+1
+        
+        dfs(0, -1)
+        
+        return ans
