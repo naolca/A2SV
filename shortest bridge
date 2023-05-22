@@ -1,0 +1,53 @@
+class Solution:
+    def shortestBridge(self, grid: List[List[int]]) -> int:
+        DIRECTIONS = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+
+        m, n = len(grid), len(grid[0])
+        loc = []
+        total = m * n
+        seeds = deque()
+        flag = False
+
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    self.dfs(grid, i, j, seeds)
+                    flag = True
+                    break 
+            if flag:
+                break
+        print(grid)
+        que = seeds
+        visited = {x:0 for x in que}
+        while que:
+            i, j = que.popleft()
+            for di, dj in DIRECTIONS:
+                ni, nj = i + di, j + dj
+                if not (0 <= ni < len(grid)) or not (0 <= nj < len(grid[0])):
+                    continue
+                if (ni, nj) not in visited:
+                    que.append((ni, nj))
+                    if grid[ni][nj] == 2:
+                        visited[(ni, nj)] = visited[(i, j)]
+                    elif grid[ni][nj] == 0:
+                        visited[(ni, nj)] = visited[(i, j)] + 1
+                    else:
+                      
+                        steps = visited[(i, j)] + 1    
+                        return steps - 1
+        return -1
+
+    def dfs(self, grid, i, j, seeds):
+        DIRECTIONS = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+
+        if not (0 <= i < len(grid)) or not (0 <= j < len(grid[0])):
+            return
+        if grid[i][j] != 1:
+            return  
+        
+        grid[i][j] = 2
+        seeds.append((i, j))
+        for di, dj in DIRECTIONS:
+            ni, nj = i + di, j + dj
+            self.dfs(grid, ni, nj, seeds)
