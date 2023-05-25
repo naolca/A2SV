@@ -1,0 +1,29 @@
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+
+        spare = defaultdict(int)
+        for i in range(len(bills)):
+            # print(spare)
+            # print(bills[i])
+            if bills[i] == 5:
+                spare[5] += 1
+                continue
+            change = bills[i] - 5
+            if change == 5:
+                if spare[5] <= 0:
+                    return False
+                spare[5] -= 1
+                spare[10] += 1
+            elif change == 15:
+                if not((spare[5] >= 3) or (spare[5] >= 1 and spare[10] >= 1)):
+                    return False
+                if spare[5] >= 1 and spare[10] >= 1:
+                    spare[5] -= 1
+                    spare[10] -= 1
+                    continue
+                elif spare[5] >= 3:
+                    spare[5] -= 3 
+                    continue
+
+        return True
+                    
