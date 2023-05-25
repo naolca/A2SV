@@ -1,0 +1,23 @@
+class Solution:
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        
+        
+        minn =  float('inf')
+        maxx =  float('-inf')
+        mins, maxs = [], [float('-inf') for i in range(len(nums))]
+
+        for i in range(len(nums)):
+            mins.append(minn)
+            minn = min(minn, nums[i])
+        for i in range(len(nums) - 1, -1, -1):
+            maxs[i] = maxx
+            maxx =  max(maxx, nums[i])
+        
+        
+        for i in range(len(nums)):
+            if mins[i] < nums[i] < maxs[i]:
+                return True
+        return False
+            
+
+       
