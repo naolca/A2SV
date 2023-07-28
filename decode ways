@@ -1,0 +1,14 @@
+class Solution:
+    def numDecodings(self, s: str) -> int:
+    #  using @lru_cache
+        @lru_cache
+        def check(idx):
+            if idx<len(s) and s[idx]=="0":
+                return 0
+            if idx>=len(s)-1:
+                return 1
+            if idx+1< len(s) and int(s[idx]+s[idx+1])<=26:
+                return check(idx+1)+check(idx+2)
+            else:
+                return check(idx+1)
+        return check(0)
