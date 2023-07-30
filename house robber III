@@ -1,0 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def rob(self, root: Optional[TreeNode]) -> int:
+        @lru_cache(None)
+        def cal(node):
+ 
+            if not node:
+                return 0
+
+            l1,r1=node.val,node.val
+            if node.left:
+                l1 += cal(node.left.left) + cal(node.left.right)
+            if node.right:
+                r1 += cal(node.right.left) + cal(node.right.right)
+            m1 = l1+r1-node.val
+
+            m2 = cal(node.left) + cal(node.right)
+
+            return max(m1,m2)
+        return cal(root)
