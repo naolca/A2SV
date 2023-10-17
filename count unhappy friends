@@ -1,0 +1,30 @@
+class Solution:
+    def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[int]]) -> int:
+        graph = defaultdict(int)
+        for x,y in pairs:
+            graph[x] = y
+            graph[y] = x
+        
+        unhappy = set()
+        
+        def notHappy(u,v,x):
+            # return True is u prefer x over v
+            return preferences[u].index(x) < preferences[u].index(v)
+        
+        def checkHappy(x,y):
+            # add the unhappy pairs in obtained from x,y
+            i = 0
+            while preferences[x][i] != y:
+                if notHappy(preferences[x][i],graph[preferences[x][i]],x):
+                    unhappy.add(x)
+                    unhappy.add(preferences[x][i])
+                    break
+                i += 1
+        
+        for x,y in pairs:
+            if x not in unhappy:
+                checkHappy(x,y)
+            if y not in unhappy:
+                checkHappy(y,x)
+
+        return len(unhappy)
